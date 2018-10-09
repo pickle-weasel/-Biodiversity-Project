@@ -30,31 +30,16 @@ function buildCharts(sample) {
 
 // @TODO: Use `d3.json` to fetch the sample data for the plots
   d3.json(`/samples/${sample}`).then((data) => {
-    console.log(data)
+    // console.log(data)
 
     var otuIds = data.otu_ids;
-    var idsSorted = otuIds.slice(0);
-    idsSorted.sort(function(a,b) {
-      return b - a
-      });
-    console.log(otuIds);
-    console.log(idsSorted);
-    console.log(idsSorted.slice(0, 10));
+    // console.log(otuIds.slice(0, 10));
 
     var otuLabels = data.otu_labels;
-    var labelsSorted = otuLabels.slice(0);
-    labelsSorted.sort(function(a,b) {
-      return b - a
-      });
-    console.log(labelsSorted.slice(0, 10))
+    // console.log(otuLabels.slice(0, 10))
 
     var sampleValues = data.sample_values;
-    // console.log(sample_values);
-    var valuesSorted = sampleValues.slice(0);
-    valuesSorted.sort(function(a,b) {
-      return b - a
-      });
-    console.log(valuesSorted.slice(0, 10));
+    // console.log(sampleValues.slice(0, 10));
 
   
     // @TODO: Build a Bubble Chart using the sample data
@@ -86,15 +71,14 @@ function buildCharts(sample) {
   // @TODO: Build a Pie Chart
   
   var data = [{
-    values: valuesSorted.slice(0, 10),
-    labels: idsSorted.slice(0, 10),
+    values: sampleValues.slice(0, 10),
+    labels: otuIds.slice(0, 10),
     type: "pie",
-    hoverinfo: labelsSorted.slice(0, 10)
+    hovertext: otuLabels.slice(0, 10)
     }];
 
   var layout = {
-    height: 500,
-    width: 500
+    margin: { t: 0, l: 0 }
   }
 
   Plotly.newPlot("pie", data, layout); 
